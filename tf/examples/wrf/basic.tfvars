@@ -2,6 +2,7 @@ cluster_name = <cluster_name>
 project      = <project>
 zone         = <zone>
 
+
 # network_name            = "<existing network name>"
 # subnetwork_name         = "<existing subnetwork name>"
 # shared_vpc_host_project = "<vpc host project>"

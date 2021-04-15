@@ -81,6 +81,7 @@ module "slurm_cluster_login" {
   disable_login_public_ips  = var.disable_login_public_ips
   labels                    = var.login_labels
   login_network_storage     = var.login_network_storage
+  image                     = var.login_image
   machine_type              = var.login_machine_type
   node_count                = var.login_node_count
   region                    = local.region
@@ -88,7 +89,6 @@ module "slurm_cluster_login" {
   service_account           = var.login_node_service_account
   munge_key                 = var.munge_key
   network_storage           = var.network_storage
-  ompi_version              = var.ompi_version
   shared_vpc_host_project   = var.shared_vpc_host_project
   subnet_depend             = module.slurm_cluster_network.subnet_depend
   subnetwork_name           = var.subnetwork_name
@@ -99,10 +99,6 @@ module "slurm_cluster_compute" {
   source = "../../modules/compute"
 
   cluster_name               = var.cluster_name
-  compute_image_disk_size_gb = var.compute_image_disk_size_gb
-  compute_image_disk_type    = var.compute_image_disk_type
-  compute_image_labels       = var.compute_image_labels
-  compute_image_machine_type = var.compute_image_machine_type
   controller_name            = module.slurm_cluster_controller.controller_node_name
   disable_compute_public_ips = var.disable_compute_public_ips
   network_storage            = var.network_storage

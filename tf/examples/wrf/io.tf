@@ -85,6 +85,14 @@ variable "controller_disk_size_gb" {
 
 variable "controller_image" {
   description = "Disk OS image (with Slurm) path for controller instance"
+  type = string
+  default = "schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
+}
+
+variable "login_image" {
+  description = "Disk OS image (with Slurm) path for login instance"
+  type = string
+  default = "schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
 }
 
 variable "controller_labels" {
@@ -224,6 +232,8 @@ variable "partitions" {
     machine_type         = string,
     max_node_count       = number,
     zone                 = string,
+    image                = string,
+    image_hyperthreads   = bool,
     compute_disk_type    = string,
     compute_disk_size_gb = number,
     compute_labels       = any,
@@ -231,13 +241,18 @@ variable "partitions" {
     gpu_type             = string,
     gpu_count            = number,
     network_storage = list(object({
-      server_ip     = string,
-      remote_mount  = string,
-      local_mount   = string,
-      fs_type       = string,
-      mount_options = string})),
+      server_ip    = string,
+      remote_mount = string,
+      local_mount  = string,
+      fs_type      = string,
+    mount_options = string })),
     preemptible_bursting = bool,
     vpc_subnet           = string,
+    exclusive            = bool,
+    enable_placement     = bool,
+    regional_capacity    = bool,
+    regional_policy      = any,
+    instance_template    = string,
   static_node_count = number }))
 }
 

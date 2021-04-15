@@ -83,9 +83,11 @@ compute_node_scopes          = [
 partitions = [
   { name                 = "c2-60"
     machine_type         = "c2-standard-60"
+    image                = ""
+    image_hyperthreads   = false
     static_node_count    = 0
     max_node_count       = 10
-    zone                 = "us-east4-c"
+    zone                 = "us-west1-b"
     compute_disk_type    = "pd-ssd"
     compute_disk_size_gb = 20
     compute_labels       = {}
@@ -95,29 +97,11 @@ partitions = [
     network_storage      = []
     preemptible_bursting = true
     vpc_subnet           = null
-  },
-#  { name                 = "partition2"
-#    machine_type         = "n1-standard-16"
-#    static_node_count    = 0
-#    max_node_count       = 20
-#    zone                 = "us-west1-b"
-#    compute_disk_type    = "pd-ssd"
-#    compute_disk_size_gb = 20
-#    compute_labels       = {
-#      key1 = "val1"
-#      key2 = "val2"
-#    }
-#    cpu_platform         = "Intel Skylake"
-#    gpu_count            = 8
-#    gpu_type             = "nvidia-tesla-v100"
-#    network_storage      = [{
-#      server_ip     = "none"
-#      remote_mount  = "<gcs bucket name>"
-#      local_mount   = "/data"
-#      fs_type       = "gcsfuse"
-#      mount_options = "file_mode=664,dir_mode=775,allow_other"
-#    }]
-#    preemptible_bursting = true
-#    vpc_subnet           = null
+    exclusive            = false
+    enable_placement     = false
+    regional_capacity    = false
+    regional_policy      = null
+    instance_template    = null
+  }
 ]
 

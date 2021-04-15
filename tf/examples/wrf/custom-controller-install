@@ -6,7 +6,7 @@ PROJECT_ID="SET GCP PROJECT ID"
 # ///////////////////////////////// #
 
 INSTALL_ROOT="/apps"
-SPACK_VERSION="v0.16.0"
+SPACK_VERSION="releases/latest"
 GCC_VERSION="9.2.0"
 OPENMPI_VERSION="4.0.5"
 WRF_VERSION="4.2"

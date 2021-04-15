@@ -1,6 +1,6 @@
-cluster_name = <cluster_name>
-project      = <project>
-zone         = <zone>
+#cluster_name = "wrfschedmd"
+#project = "wrf-gcp"
+#zone = "us-west1-b"
 
 
 # network_name            = "<existing network name>"
@@ -8,7 +8,7 @@ zone         = <zone>
 # shared_vpc_host_project = "<vpc host project>"
 
 # disable_controller_public_ips = true
-# disable_login_public_ips      = true
+ disable_login_public_ips      = false
 # disable_compute_public_ips    = true
 
 # ompi_version  = null # e.g. v3.1.x
@@ -83,7 +83,7 @@ compute_node_scopes          = [
 partitions = [
   { name                 = "c2-60"
     machine_type         = "c2-standard-60"
-    image                = ""
+    image                = "projects/schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
     image_hyperthreads   = false
     static_node_count    = 0
     max_node_count       = 10

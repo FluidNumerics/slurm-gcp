@@ -5,7 +5,7 @@ SCRIPTS=../../../scripts
 $SCRIPTS/custom-controller-install: custom-controller-install
 	ln -sfn $$PWD/custom-controller-install ../../../scripts/custom-controller-install
 
-plan:
+plan:$SCRIPTS/custom-controller-install
 	terraform plan -var-file=basic.tfvars -out terraform.tfplan
 
 apply: $SCRIPTS/custom-controller-install

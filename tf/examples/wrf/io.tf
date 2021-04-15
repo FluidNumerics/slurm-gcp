@@ -86,13 +86,13 @@ variable "controller_disk_size_gb" {
 variable "controller_image" {
   description = "Disk OS image (with Slurm) path for controller instance"
   type = string
-  default = "schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
+  default = "projects/schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
 }
 
 variable "login_image" {
   description = "Disk OS image (with Slurm) path for login instance"
   type = string
-  default = "schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
+  default = "projects/schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
 }
 
 variable "controller_labels" {

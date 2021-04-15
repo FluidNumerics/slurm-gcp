@@ -83,6 +83,10 @@ variable "controller_disk_size_gb" {
   default     = 50
 }
 
+variable "controller_image" {
+  description = "Disk OS image (with Slurm) path for controller instance"
+}
+
 variable "controller_labels" {
   description = "Labels to add to controller instance. List of key key, value pairs."
   type        = any

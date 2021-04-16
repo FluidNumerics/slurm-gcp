@@ -1,7 +1,31 @@
-#cluster_name = "wrfschedmd"
-#project = "wrf-gcp"
-#zone = "us-west1-b"
+cluster_name = "demo"
+project = "wrf-gcp"
+zone = "us-west1-b"
 
+partitions = [
+  { name                 = "c2-60"
+    machine_type         = "c2-standard-60"
+    image                = "projects/hpc-apps/global/images/wrf-gcp-centos7-latest"
+    image_hyperthreads   = false
+    static_node_count    = 0
+    max_node_count       = 10
+    zone                 = "us-west1-b"
+    compute_disk_type    = "pd-ssd"
+    compute_disk_size_gb = 20
+    compute_labels       = {}
+    cpu_platform         = null
+    gpu_count            = 0
+    gpu_type             = null
+    network_storage      = []
+    preemptible_bursting = true
+    vpc_subnet           = null
+    exclusive            = false
+    enable_placement     = false
+    regional_capacity    = false
+    regional_policy      = null
+    instance_template    = null
+  }
+]
 
 # network_name            = "<existing network name>"
 # subnetwork_name         = "<existing subnetwork name>"
@@ -80,28 +104,4 @@ compute_node_scopes          = [
   "https://www.googleapis.com/auth/cloud-platform"
 ]
 
-partitions = [
-  { name                 = "c2-60"
-    machine_type         = "c2-standard-60"
-    image                = "projects/schedmd-slurm-public/global/images/schedmd-slurm-20-11-4-hpc-centos-7-2021-03-12-215000"
-    image_hyperthreads   = false
-    static_node_count    = 0
-    max_node_count       = 10
-    zone                 = "us-west1-b"
-    compute_disk_type    = "pd-ssd"
-    compute_disk_size_gb = 20
-    compute_labels       = {}
-    cpu_platform         = null
-    gpu_count            = 0
-    gpu_type             = null
-    network_storage      = []
-    preemptible_bursting = true
-    vpc_subnet           = null
-    exclusive            = false
-    enable_placement     = false
-    regional_capacity    = false
-    regional_policy      = null
-    instance_template    = null
-  }
-]
 

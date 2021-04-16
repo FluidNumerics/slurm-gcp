@@ -20,7 +20,7 @@ git clone https://github.com/spack/spack.git --branch ${SPACK_VERSION} ${INSTALL
 echo "export SPACK_ROOT=/apps/spack" > /etc/profile.d/setup_spack.sh
 echo ". \${SPACK_ROOT}/share/spack/setup-env.sh" >> /etc/profile.d/setup_spack.sh
 source ${INSTALL_ROOT}/spack/share/spack/setup-env.sh
-spack compiler find slurm --scope site
+spack compiler find --scope site slurm
 
 # Install lmod for module managament
 spack install lmod

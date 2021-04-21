@@ -3,6 +3,7 @@ project = "wrf-gcp"
 zone = "us-west1-b"
 
 controller_image = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
+login_image = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
 
 partitions = [
   { name                 = "c2-60"

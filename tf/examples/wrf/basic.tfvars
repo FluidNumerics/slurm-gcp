@@ -2,10 +2,12 @@ cluster_name = "demo"
 project = "wrf-gcp"
 zone = "us-west1-b"
 
+controller_image = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
+
 partitions = [
   { name                 = "c2-60"
     machine_type         = "c2-standard-60"
-    image                = "projects/hpc-apps/global/images/wrf-gcp-centos7-latest"
+    image                = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
     image_hyperthreads   = true
     static_node_count    = 0
     max_node_count       = 10
@@ -17,7 +19,7 @@ partitions = [
     gpu_count            = 0
     gpu_type             = null
     network_storage      = []
-    preemptible_bursting = true
+    preemptible_bursting = false
     vpc_subnet           = null
     exclusive            = false
     enable_placement     = false

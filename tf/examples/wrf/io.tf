@@ -153,7 +153,7 @@ variable "login_disk_type" {
 variable "login_disk_size_gb" {
   description = "Size of disk for login nodes."
   type        = number
-  default     = 20
+  default     = 50
 }
 
 variable "login_labels" {

@@ -1,3 +1,7 @@
+NAME ?= "wrf-demo"
+PROJECT ?= ""
+ZONE ?= "us-west1-b"
+
 SCRIPTS=../../../scripts
 
 .PHONY: plan apply destroy
@@ -5,10 +9,16 @@ SCRIPTS=../../../scripts
 $SCRIPTS/custom-controller-install: custom-controller-install
 	ln -sfn $$PWD/custom-controller-install ../../../scripts/custom-controller-install
 
-plan:$SCRIPTS/custom-controller-install
+basic.tfvars: basic.tfvars.tmpl
+	cp basic.tfvars.tmpl basic.tfvars
+	sed -i "s/<cluster name>/${NAME}/g" basic.tfvars
+	sed -i "s/<project>/${PROJECT}/g" basic.tfvars
+	sed -i "s/<zone>/${ZONE}/g" basic.tfvars
+
+plan:$SCRIPTS/custom-controller-install basic.tfvars
 	terraform plan -var-file=basic.tfvars -out terraform.tfplan
 
-apply: $SCRIPTS/custom-controller-install
+apply: plan
 	terraform apply -var-file=basic.tfvars -auto-approve
 
 destroy:

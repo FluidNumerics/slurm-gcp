@@ -1,6 +1,6 @@
-cluster_name = "demo"
-project = "wrf-gcp"
-zone = "us-west1-b"
+cluster_name = "<cluster name>"
+project = "<project>"
+zone = "<zone>"
 
 controller_image = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
 login_image = "projects/hpc-apps/global/images/wrf-gcp-centos7-slurm-gcp-latest"
@@ -12,7 +12,7 @@ partitions = [
     image_hyperthreads   = true
     static_node_count    = 0
     max_node_count       = 10
-    zone                 = "us-west1-b"
+    zone                 = "<zone>"
     compute_disk_type    = "pd-standard"
     compute_disk_size_gb = 50
     compute_labels       = {}

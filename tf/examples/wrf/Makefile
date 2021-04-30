@@ -1,8 +1,8 @@
 NAME ?= "wrf-demo"
 PROJECT ?= ""
 ZONE ?= "us-west1-b"
-MACHINE_TYPE ?= "c2-standard-60"
-MAX_NODE ?= 10
+MACHINE_TYPE ?= "c2-standard-8"
+MAX_NODE ?= 3
 
 SCRIPTS=../../../scripts
 

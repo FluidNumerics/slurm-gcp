@@ -1,6 +1,8 @@
 NAME ?= "wrf-demo"
 PROJECT ?= ""
 ZONE ?= "us-west1-b"
+MACHINE_TYPE ?= "c2-standard-60"
+MAX_NODE ?= 10
 
 SCRIPTS=../../../scripts
 
@@ -14,6 +16,8 @@ basic.tfvars: basic.tfvars.tmpl
 	sed -i "s/<cluster name>/${NAME}/g" basic.tfvars
 	sed -i "s/<project>/${PROJECT}/g" basic.tfvars
 	sed -i "s/<zone>/${ZONE}/g" basic.tfvars
+	sed -i "s/<machine_type>/${MACHINE_TYPE}/g" basic.tfvars
+	sed -i "s/<max_node>/${MAX_NODE}/g" basic.tfvars
 
 plan:$SCRIPTS/custom-controller-install basic.tfvars
 	terraform plan -var-file=basic.tfvars -out terraform.tfplan

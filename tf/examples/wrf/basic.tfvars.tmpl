@@ -6,12 +6,12 @@ controller_image = "projects/hpc-apps/global/images/wrf-gcp-slurm-gcp-centos7-la
 login_image = "projects/hpc-apps/global/images/wrf-gcp-slurm-gcp-centos7-latest"
 
 partitions = [
-  { name                 = "c2-60"
-    machine_type         = "c2-standard-60"
+  { name                 = "wrf"
+    machine_type         = "<machine_type>"
     image                = "projects/hpc-apps/global/images/wrf-gcp-slurm-gcp-centos7-latest"
     image_hyperthreads   = true
     static_node_count    = 0
-    max_node_count       = 10
+    max_node_count       = <max_node>
     zone                 = "<zone>"
     compute_disk_type    = "pd-standard"
     compute_disk_size_gb = 50

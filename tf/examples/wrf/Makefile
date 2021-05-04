@@ -1,8 +1,8 @@
-NAME ?= "wrf-demo"
-PROJECT ?= ""
-ZONE ?= "us-west1-b"
-MACHINE_TYPE ?= "c2-standard-8"
-MAX_NODE ?= 3
+WRF_NAME ?= "wrf-demo"
+WRF_PROJECT ?= ""
+WRF_ZONE ?= "us-west1-b"
+WRF_MACHINE_TYPE ?= "c2-standard-8"
+WRF_MAX_NODE ?= 3
 
 SCRIPTS=../../../scripts
 
@@ -13,11 +13,11 @@ $SCRIPTS/custom-controller-install: custom-controller-install
 
 basic.tfvars: basic.tfvars.tmpl
 	cp basic.tfvars.tmpl basic.tfvars
-	sed -i "s/<cluster name>/${NAME}/g" basic.tfvars
-	sed -i "s/<project>/${PROJECT}/g" basic.tfvars
-	sed -i "s/<zone>/${ZONE}/g" basic.tfvars
-	sed -i "s/<machine_type>/${MACHINE_TYPE}/g" basic.tfvars
-	sed -i "s/<max_node>/${MAX_NODE}/g" basic.tfvars
+	sed -i "s/<cluster name>/${WRF_NAME}/g" basic.tfvars
+	sed -i "s/<project>/${WRF_PROJECT}/g" basic.tfvars
+	sed -i "s/<zone>/${WRF_ZONE}/g" basic.tfvars
+	sed -i "s/<machine_type>/${WRF_MACHINE_TYPE}/g" basic.tfvars
+	sed -i "s/<max_node>/${WRF_MAX_NODE}/g" basic.tfvars
 
 plan:$SCRIPTS/custom-controller-install basic.tfvars
 	terraform plan -var-file=basic.tfvars -out terraform.tfplan

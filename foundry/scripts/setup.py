@@ -376,7 +376,8 @@ def install_dependencies():
     if cfg.os_name in ('centos7', 'centos8'):
         util.run(f"{cfg.pacman} -y groupinstall 'Development Tools'")
     packages = util.get_metadata('attributes/packages').splitlines()
-    util.run(f"{cfg.pacman} install -y {' '.join(packages)}", shell=True)
+    util.run(f"{cfg.pacman} install -y {' '.join(packages)}", shell=True,
+             env=dict(os.environ, DEBIAN_FRONTEND='noninteractive'))
     install_libjwt()
 
 
@@ -387,21 +388,16 @@ def install_apps():
     install_gcsfuse()
     install_cuda()
 
-    # install stackdriver monitoring and logging
-    add_mon_script = Path('/tmp/add-monitoring-agent-repo.sh')
-    add_mon_url = f'https://dl.google.com/cloudagents/{add_mon_script.name}'
-    urllib.request.urlretrieve(add_mon_url, add_mon_script)
-    util.run(f"bash {add_mon_script}")
-    cfg.update()
-    util.run(f"{cfg.pacman} install -y stackdriver-agent")
+    def install_agent(script):
+        url = f'https://dl.google.com/cloudagents/{script.name}'
+        urllib.request.urlretrieve(url, script)
+        util.run(f"bash {script} --also-install")
 
-    add_log_script = Path('/tmp/install-logging-agent.sh')
-    add_log_url = f'https://dl.google.com/cloudagents/{add_log_script.name}'
-    urllib.request.urlretrieve(add_log_url, add_log_script)
-    util.run(f"bash {add_log_script}")
+    scripts = SCRIPTSDIR
+    for agent in ('add-monitoring-agent-repo.sh',
+                  'add-logging-agent-repo.sh',):
+        install_agent(scripts/agent)
     install_slurmlog_conf()
-
-    util.run("systemctl enable stackdriver-agent google-fluentd")
 
 
 def install_compiled_apps():
@@ -543,7 +539,8 @@ ConditionPathExists={slurmdirs.etc}/slurm.conf
 Type=simple
 EnvironmentFile=-/etc/sysconfig/slurmrestd
 Environment="SLURM_JWT=daemon"
-ExecStart={dirs.install}/sbin/slurmrestd $SLURMRESTD_OPTIONS 0.0.0.0:80
+Environment="SLURMRESTD_BINDS=localhost:8383 0.0.0.0:6842 :::8642"
+ExecStart={dirs.install}/sbin/slurmrestd $SLURMRESTD_OPTIONS $SLURMRESTD_BINDS
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
@@ -642,9 +639,8 @@ RPCNFSDCOUNT=256
 def setup_selinux():
     """ Make sure selinux is not enabled """
     if cfg.os_name in ('centos7', 'centos8'):
-        util.run('setenforce 0')
         Path('/etc/selinux/config').write_text("""
-SELINUX=permissive
+SELINUX=disabled
 SELINUXTYPE=targeted
 """)
 
@@ -746,6 +742,8 @@ def main():
     run_custom_scripts()
     
     setup_logrotate()
+
+    #util.run("touch /.google_hpc_firstrun")
 
     remove_metadata()
     end_motd()

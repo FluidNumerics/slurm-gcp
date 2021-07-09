@@ -24,7 +24,9 @@ Also, join comunity discussions on either the
   * [Install using GCP Marketplace](#install-using-gcp-marketplace)
   * [Install using Terraform](#install-using-terraform)
 	* [Defining network storage mounts](#defining-network-storage-mounts)
-  * [Preinstalled Modules: OpenMPI](#preinstalled-modules-openmpi)
+  * [Public Slurm Images](#public-slurm-images)
+	* [Hyperthreads](hyperthreads)
+	* [Preinstalled Modules: OpenMPI](#preinstalled-modules-openmpi)
   * [Installing Custom Packages](#installing-custom-packages)
   * [Accessing Compute Nodes Directly](#accessing-compute-nodes-directly)
   * [OS Login](#os-login)
@@ -47,7 +49,7 @@ Platform. The scripts setup the following scenario:
   disk type, cpu platform, and maximum node count.
 
 Instances are created from images with Slurm and dependencies preinstalled. The default,
-`schedmd-slurm-public/schedmd-slurm-20-11-4-hpc-centos-7`, is based on the
+`schedmd-slurm-public/schedmd-slurm-20-11-7-hpc-centos-7`, is based on the
 Google-provided HPC-optimized CentOS 7 image.
 
 By default, `/apps` and `/home` are mounted from the controller across all instances
@@ -111,7 +113,25 @@ access the mount.
 
 `fs_type` can be one of: `nfs`, `cifs`, `lustre`, `gcsfuse`
 
-### Preinstalled modules: OpenMPI
+### Public Slurm images
+There are currently 3 public image families available for use with Slurm-GCP:  
+`projects/schedmd-slurm-public/global/images/family/`  
+* `schedmd-slurm-20-11-7-hpc-centos-7`  
+* `schedmd-slurm-20-11-7-centos-7`  
+* `schedmd-slurm-20-11-7-debian-10`
+
+#### Hyperthreads
+The `hpc-centos-7` image has hyperthreads enabled by default, but can have the
+hyperthreads disabled by setting `image_hyperthreads` to `false`. The non-HPC 
+images, `centos-7` and `debian-10`, cannot have hyperthreads disabled.  Slurm-GCP 
+must know this for each compute node type when configuring the cluster so it can 
+configure the correct number of CPUs. `image_hyperthreads` must be set on the 
+partition definition to reflect the state of hyperthreads in the image.
+
+**NOTE:** The result of disabling hyperthreads is that half the number of CPUs will 
+be usable, eg. `c2-standard-4` compute nodes will have 2 CPUs.
+
+#### Preinstalled modules: OpenMPI
 OpenMPI has been compiled to work with Slurm's srun. e.g.
 ```
 $ module load openmpi

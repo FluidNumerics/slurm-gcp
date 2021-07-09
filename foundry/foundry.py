@@ -143,7 +143,7 @@ def main(dep_name='slurm-image-foundry', cleanup=True, force=False,
             log.info("\tresuming image creation")
         elif force:
             log.info("\tdeleting")
-            gcloud_dm(f"\tdeployments delete {dep_name}", check=True)
+            gcloud_dm(f"\tdeployments delete {dep_name} -q", check=True)
         else:
             log.info("\taborting")
             return
@@ -181,7 +181,7 @@ OPTIONS = (
           help="delete existing deployments of the same name first")),
     ('--no-cleanup', '-c',
      dict(dest='cleanup', action='store_false',
-          help="Do not delete the deployment at the end. By default, the deployment is deleted if all images were successfully created")),
+          help="Do not delete the deployment at the end. By default, the deployment is  if all images were successfully created")),
     ('--resume', '-r',
      dict(dest='resume', action='store_true',
           help="Create images from whatever instances are in the existing deployment")),

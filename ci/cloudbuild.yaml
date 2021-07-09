@@ -1,0 +1,13 @@
+
+steps:
+        - id: Run the Foundry
+          name: 'gcr.io/${PROJECT_ID}/python'
+          entrypoint: 'sh'
+          args: 
+          - '-c'
+          - | 
+              cd foundry/
+              python3.9 --version
+              python3.9 ./foundry.py --force
+
+        # TO DO : Attach license to images #

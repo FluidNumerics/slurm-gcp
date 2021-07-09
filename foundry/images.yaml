@@ -18,7 +18,7 @@
 imports:
 - path: slurm-template.py
 - path: &centos-7 scripts/centos-7-packages
-- path: &centoso-8 scripts/centos-8-packages
+- path: &centos-8 scripts/centos-8-packages
 - path: &debian-10 scripts/debian-10-packages
 - path: &ubuntu-2004 scripts/ubuntu-2004-packages
 - path: custom.d/*
@@ -37,12 +37,7 @@ resources:
     images:
     - base: centos-7
       base_image: projects/centos-cloud/global/images/family/centos-7
-    - base: hpc-centos-7
-      base_image: projects/cloud-hpc-image-public/global/images/family/hpc-centos-7
-      packages: *centos-7
-    #- key: centos-8
-    #  base_image: projects/centos-cloud/global/images/family/centos-8
     - base: debian-10
       base_image: projects/debian-cloud/global/images/family/debian-10
-    #- key: ubuntu-2004
-    #  base_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts
+    - base: ubuntu-2004
+      base_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts

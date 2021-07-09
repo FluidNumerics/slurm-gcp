@@ -10,4 +10,4 @@ steps:
               python3.9 --version
               python3.9 ./foundry.py --force
 
-        # TO DO : Attach license to images #
+timeout: 9600s

@@ -39,5 +39,5 @@ resources:
       base_image: projects/centos-cloud/global/images/family/centos-7
     - base: debian-10
       base_image: projects/debian-cloud/global/images/family/debian-10
-      #- base: ubuntu-2004
-      #  base_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts
+    - base: ubuntu-2004
+      base_image: projects/ubuntu-os-cloud/global/images/family/ubuntu-2004-lts

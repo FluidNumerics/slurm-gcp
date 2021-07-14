@@ -169,7 +169,7 @@ def main(dep_name='slurm-image-foundry', cleanup=True, force=False,
         return
 
     if create_images(instances) and cleanup:
-        gcloud_dm(f"deployments delete {dep_name}", check=True)
+        gcloud_dm(f"deployments delete {dep_name} -q", check=True)
 
 
 OPTIONS = (

@@ -217,7 +217,8 @@ def setup_modules():
 
     # for CentOS 7
     modulespath = Path('/usr/share/lmod/lmod/init/.modulespath')
-    modulespath.write_text(f"""
+    if modulepath.exists():
+       modulespath.write_text(f"""
 {dirs.modulefiles}
 """)
 

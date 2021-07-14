@@ -207,17 +207,17 @@ def setup_modules():
     """ Add /apps/modulefiles as environment module dir """
 
     # for Debian 10
-    modulepaths = Path('/etc/lmod/modulespath')
-    if modulepaths.exists():
-        paths = [path for path in modulepaths.read_text().splitlines()
+    modulespath = Path('/etc/lmod/modulespath')
+    if modulespath.exists():
+        paths = [path for path in modulespath.read_text().splitlines()
                  if not path.startswith('#')]
         if str(dirs.modulefiles) not in paths:
-            with modulepaths.open('a') as f:
+            with modulespath.open('a') as f:
                 f.write(f"\n{dirs.modulefiles}")
 
     # for CentOS 7
     modulespath = Path('/usr/share/lmod/lmod/init/.modulespath')
-    if modulepath.exists():
+    if modulespath.exists():
        modulespath.write_text(f"""
 {dirs.modulefiles}
 """)

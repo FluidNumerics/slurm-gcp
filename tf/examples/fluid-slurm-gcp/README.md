@@ -10,7 +10,7 @@ This deployment uses VM images that are licensed to you under the [Fluid-Slurm-G
 
 Use of the VM images with this deployment applies a licensing fee that is based on your usage on Google Cloud :
 * $0.006638 USD/vCPU/hour
-* $0.0945 USD/vCPU/hour
+* $0.0945 USD/GPU/hour
 
 This fee enables Fluid Numerics to provide you support.
 

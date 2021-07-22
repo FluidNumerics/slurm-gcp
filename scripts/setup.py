@@ -747,7 +747,7 @@ def setup_compute():
 
 def main():
 
-    start_motd()
+    #start_motd()
     configure_dirs()
     install_meta_files()
 
@@ -763,7 +763,7 @@ def main():
     )
     setup()
 
-    end_motd()
+    #end_motd()
 # END main()
 
 
